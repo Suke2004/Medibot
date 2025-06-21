@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: medibot
+    runtime: python
+    repo: https://github.com/Suke2004/Medibot
+    branch: main
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11
+      - key: GOOGLE_API_KEY
+        sync: false
+      - key: FLASK_ENV
+        value: production
+      - key: LANGCHAIN_TRACING_V2
+        value: false
+    autoDeploy: true
