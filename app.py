@@ -20,7 +20,7 @@ CORS(app)
 
 # Constants
 UPLOAD_FOLDER = "uploads"
-CHAT_LOG_FILE = "chat_logs.json"
+# CHAT_LOG_FILE = "chat_logs.json"
 ALLOWED_EXTENSIONS = {'pdf'}
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
@@ -56,20 +56,20 @@ pdf_rag_chain = None
 
 # ---------- UTILITIES ----------
 
-def log_chat(question, answer):
-    entry = {
-        "timestamp": datetime.now().isoformat(),
-        "question": question,
-        "answer": answer
-    }
-    if os.path.exists(CHAT_LOG_FILE):
-        with open(CHAT_LOG_FILE, "r") as f:
-            data = json.load(f)
-    else:
-        data = []
-    data.append(entry)
-    with open(CHAT_LOG_FILE, "w") as f:
-        json.dump(data, f, indent=2)
+# def log_chat(question, answer):
+#     entry = {
+#         "timestamp": datetime.now().isoformat(),
+#         "question": question,
+#         "answer": answer
+#     }
+#     if os.path.exists(CHAT_LOG_FILE):
+#         with open(CHAT_LOG_FILE, "r") as f:
+#             data = json.load(f)
+#     else:
+#         data = []
+#     data.append(entry)
+#     with open(CHAT_LOG_FILE, "w") as f:
+#         json.dump(data, f, indent=2)
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -99,7 +99,7 @@ def chat():
             result = db_rag_chain.invoke({"input": user_input})
 
         answer = result.get("answer", "No answer generated.")
-        log_chat(user_input, answer)
+        # log_chat(user_input, answer)
         return jsonify({"response": answer})
 
     except Exception as e:
