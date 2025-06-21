@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template, session
-from flask_cors import CORS
+# from flask_cors import CORS
 from dotenv import load_dotenv
 from werkzeug.utils import secure_filename
 import os, logging, json
@@ -16,11 +16,11 @@ from src.prompt import system_prompt
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key"
-CORS(app)
+# CORS(app)
 
 # Constants
 UPLOAD_FOLDER = "uploads"
-# CHAT_LOG_FILE = "chat_logs.json"
+CHAT_LOG_FILE = "chat_logs.json"
 ALLOWED_EXTENSIONS = {'pdf'}
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
